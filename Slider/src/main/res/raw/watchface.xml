@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<WatchFace width="450" height="450">
+    <Metadata key="CLOCK_TYPE" value="DIGITAL"/>
+    <UserConfigurations>
+        <ColorConfiguration id="color_primary" displayName="color_primary" defaultValue="2">
+            <ColorOption id="0" displayName="white" colors="#FFDCDCDC"/>
+            <ColorOption id="1" displayName="gray" colors="#FF888888"/>
+            <ColorOption id="2" displayName="blue_light" colors="#FF00B8D4"/>
+            <ColorOption id="3" displayName="blue_dark" colors="#FF2962FF"/>
+            <ColorOption id="4" displayName="purple" colors="#FFAA00FF"/>
+            <ColorOption id="5" displayName="pink" colors="#FFFF80AB"/>
+            <ColorOption id="6" displayName="red" colors="#FFE91E1E"/>
+            <ColorOption id="7" displayName="orange" colors="#FFFF8225"/>
+            <ColorOption id="8" displayName="yellow" colors="#FFFFD600"/>
+            <ColorOption id="9" displayName="green" colors="#FF00E05D"/>
+        </ColorConfiguration>
+        <ColorConfiguration id="color_secondary" displayName="color_secondary" defaultValue="7">
+            <ColorOption id="0" displayName="white" colors="#FFDCDCDC"/>
+            <ColorOption id="1" displayName="gray" colors="#FF888888"/>
+            <ColorOption id="2" displayName="blue_light" colors="#FF00B8D4"/>
+            <ColorOption id="3" displayName="blue_dark" colors="#FF2962FF"/>
+            <ColorOption id="4" displayName="purple" colors="#FFAA00FF"/>
+            <ColorOption id="5" displayName="pink" colors="#FFFF80AB"/>
+            <ColorOption id="6" displayName="red" colors="#FFE91E1E"/>
+            <ColorOption id="7" displayName="orange" colors="#FFFF8225"/>
+            <ColorOption id="8" displayName="yellow" colors="#FFFFD600"/>
+            <ColorOption id="9" displayName="green" colors="#FF00E05D"/>
+        </ColorConfiguration>
+        <ColorConfiguration id="color_tertiary" displayName="color_tertiary" defaultValue="8">
+            <ColorOption id="0" displayName="white" colors="#FFDCDCDC"/>
+            <ColorOption id="1" displayName="gray" colors="#FF888888"/>
+            <ColorOption id="2" displayName="blue_light" colors="#FF00B8D4"/>
+            <ColorOption id="3" displayName="blue_dark" colors="#FF2962FF"/>
+            <ColorOption id="4" displayName="purple" colors="#FFAA00FF"/>
+            <ColorOption id="5" displayName="pink" colors="#FFFF80AB"/>
+            <ColorOption id="6" displayName="red" colors="#FFE91E1E"/>
+            <ColorOption id="7" displayName="orange" colors="#FFFF8225"/>
+            <ColorOption id="8" displayName="yellow" colors="#FFFFD600"/>
+            <ColorOption id="9" displayName="green" colors="#FF00E05D"/>
+        </ColorConfiguration>
+    </UserConfigurations>
+
+    <Scene>
+        // ACTIVE DISPLAY
+        // -----------------------------------------------------------------------------------------
+        <Group name="Active" x="0" y="0" width="450" height="450">
+            <Variant mode="AMBIENT" target="alpha" value="0"/>
+
+            <PartDraw x="0" y="0" width="450" height="450">
+                
+            </PartDraw>
+        </Group>
+
+        // ALWAYS ON DISPLAY
+        // -----------------------------------------------------------------------------------------
+        <Group name="Active" x="0" y="0" width="450" height="450" alpha="0">
+            <Variant mode="AMBIENT" target="alpha" value="255"/>
+
+        </Group>
+
+        // Complications
+        // -----------------------------------------------------------------------------------------
+
+    </Scene>
+</WatchFace>
