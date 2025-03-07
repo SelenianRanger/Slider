@@ -49,6 +49,7 @@
             // rotating clock
             <HourHand resource="" x="0" y="0" width="450" height="450">
                 <Group name="clock" x="0" y="0" width="450" height="450" angle="-90">
+
                     // minutes
                     <PartDraw x="0" y="0" width="450" height="450">
                         <Rectangle x="150" y="0" width="450" height="450">
@@ -91,20 +92,48 @@
                         </PartDraw>
                     </Group>
 
-                    // minutes shadow
+                    // top half
+                    <Group name="hours_cutout" x="0" y="0" width="450" height="450">
+                        <PartDraw x="0" y="0" width="450" height="450">
+                            <Ellipse x="0" y="0" width="450" height="450">
+                                <Fill color="[CONFIGURATION.color_primary]"/>
+                            </Ellipse>
+                            <Ellipse x="0" y="0" width="450" height="450">
+                                <Fill color="#22000000"/>
+                            </Ellipse>
+                            <Ellipse x="40" y="40" width="370" height="370">
+                                <Fill color="#44000000"/>
+                            </Ellipse>
+                        </PartDraw>
+                        <PartDraw x="0" y="0" width="450" height="450" renderMode="MASK">
+                            <Rectangle x="0" y="0" width="450" height="225">
+                                <Fill color="#FFFFFFFF"/>
+                            </Rectangle>
+                        </PartDraw>
+                    </Group>
+
+                    // panel shadows
                     <PartDraw x="0" y="0" width="450" height="450">
+                        // top shadow
+                        <Rectangle x="0" y="0" width="450" height="450">
+                            <Fill color="#FF000000">
+                                <LinearGradient startX="225" startY="300" endX="225" endY="0"
+                                    colors="#00000000 #DD000000 #00000000" positions="0 0.15 0.29"/>
+                            </Fill>
+                        </Rectangle>
+                        // minutes shadow
                         <Rectangle x="0" y="0" width="450" height="450">
                             <Fill color="#FF000000">
                                 <LinearGradient startX="225" startY="225" endX="225" endY="450"
-                                    colors="#DD000000 #00000000" positions="0.3 0.39"/>
+                                    colors="#00000000 #DD000000 #00000000" positions="0 0.3 0.39"/>
                             </Fill>
                         </Rectangle>
                     </PartDraw>
 
-                    // hours
+                    // mid panel
                     <PartDraw x="0" y="0" width="450" height="450">
-                        // hours fill
-                        <Rectangle x="0" y="0" width="450" height="300">
+                        // panel fill
+                        <Rectangle x="0" y="225" width="450" height="75">
                             <Fill color="[CONFIGURATION.color_primary]"/>
                         </Rectangle>
 
@@ -113,20 +142,6 @@
                             <Stroke color="#FF000000" thickness="20" cap="ROUND"/>
                         </Line>
                     </PartDraw>
-
-                    // hours cutout
-                    <Group name="hours_cutout" x="0" y="0" width="450" height="450">
-                        <PartDraw x="0" y="0" width="450" height="450">
-                            <Ellipse x="40" y="40" width="370" height="370">
-                                <Fill color="#FF000000"/>
-                            </Ellipse>
-                        </PartDraw>
-                        <PartDraw x="0" y="0" width="450" height="450" renderMode="MASK">
-                            <Rectangle x="0" y="0" width="450" height="225">
-                                <Fill color="#44FFFFFF"/>
-                            </Rectangle>
-                        </PartDraw>
-                    </Group>
 
                     // mid line
                     <PartDraw x="0" y="0" width="450" height="450">
@@ -143,13 +158,29 @@
 
                     // seconds
                     <Group name="seconds_marker" x="0" y="0" width="450" height="450">
-                        <PartDraw x="0" y="0" width="450" height="450">
-                            // seconds
-                            <Rectangle x="25" y="252" width="15" height="20">
-                                <Transform target="x" value="[SECOND_MILLISECOND]/60 * 400 + 16"/>
-                                <Fill color="[CONFIGURATION.color_secondary]"/>
-                            </Rectangle>
-                        </PartDraw>
+                        <Condition>
+                            <Expressions>
+                                <Expression name="isEvenMinute">[MINUTE]%2==0</Expression>
+                            </Expressions>
+                            <Compare expression="isEvenMinute">
+                                <PartDraw x="0" y="0" width="450" height="450">
+                                    // seconds
+                                    <Rectangle x="16" y="252" width="15" height="20">
+                                        <Transform target="x" value="[SECOND_MILLISECOND]/60 * 400 + 16"/>
+                                        <Fill color="[CONFIGURATION.color_secondary]"/>
+                                    </Rectangle>
+                                </PartDraw>
+                            </Compare>
+                            <Default>
+                                <PartDraw x="0" y="0" width="450" height="450">
+                                    // seconds
+                                    <Rectangle x="16" y="252" width="15" height="20">
+                                        <Transform target="x" value="435 - ([SECOND_MILLISECOND]/60 * 400 + 16)"/>
+                                        <Fill color="[CONFIGURATION.color_secondary]"/>
+                                    </Rectangle>
+                                </PartDraw>
+                            </Default>
+                        </Condition>
                         <PartDraw x="0" y="0" width="450" height="450" renderMode="MASK">
                             <Line startX="30" startY="262" endX="420" endY="262">
                                 <Stroke color="#FFFFFFFF" thickness="20" cap="ROUND"/>
@@ -179,33 +210,34 @@
                 <PartDraw x="0" y="0" width="450" height="450">
                     <Transform target="scaleX" value="1 + sin(([UTC_TIMESTAMP] % (60000/80)) / (60000/80) * 6.28) * 0.05"/>
                     <Transform target="scaleY" value="1 + sin(([UTC_TIMESTAMP] % (60000/80)) / (60000/80) * 6.28) * 0.05"/>
-                    <Arc centerX="225" centerY="225" width="420" height="420" startAngle="-90" endAngle="90">
+                    <Arc centerX="225" centerY="225" width="422" height="422" startAngle="-90" endAngle="90">
                         <Stroke color="#22000000" thickness="2" cap="BUTT"/>
                     </Arc>
                 </PartDraw>
             </Group>
 
+
+            // gear window
+            <PartDraw x="0" y="0" width="450" height="450">
+                <Transform target="angle" value="[HOUR_0_11_MINUTE]/12 * 360 - 90"/>
+                <Arc centerX="225" centerY="225" width="425" height="425" startAngle="-30.5" endAngle="30.5">
+                    <Stroke color="#FF000000" thickness="25" cap="BUTT"/>
+                </Arc>
+            </PartDraw>
+
             // seconds gear
             <Group name="seconds_gear" x="0" y="0" width="450" height="450">
-                // gear window
-                <PartDraw x="0" y="0" width="450" height="450">
-                    <Transform target="angle" value="[HOUR_0_11_MINUTE]/12 * 360 - 90"/>
-                    <Arc centerX="225" centerY="225" width="425" height="425" startAngle="-30" endAngle="30">
-                        <Stroke color="#FF000000" thickness="25" cap="BUTT"/>
-                    </Arc>
-                </PartDraw>
-
                 <SecondHand resource="" x="0" y="0" width="450" height="450">
                     <Tick duration="0.1" strength="0"/>
                     // gear
                     <PartDraw x="0" y="0" width="450" height="450">
-                        <Ellipse x="10" y="10" width="430" height="430">
+                        <Arc centerX="225" centerY="225" width="430" height="430" startAngle="0" endAngle="360">
                             <Stroke color="[CONFIGURATION.color_secondary]" thickness="11" cap="BUTT"
-                                dashIntervals="20 20"/>
-                        </Ellipse>
-                        <Ellipse x="15" y="15" width="420" height="420">
-                            <Fill color="[CONFIGURATION.color_secondary]"/>
-                        </Ellipse>
+                                dashIntervals="20 30"/>
+                        </Arc>
+                        <Arc centerX="225" centerY="225" width="410" height="410" startAngle="0" endAngle="360">
+                            <Stroke color="[CONFIGURATION.color_secondary]" thickness="10" cap="BUTT"/>
+                        </Arc>
                     </PartDraw>
                 </SecondHand>
                 // gear mask
