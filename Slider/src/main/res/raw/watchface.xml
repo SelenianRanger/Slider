@@ -46,10 +46,110 @@
         <Group name="Active" x="0" y="0" width="450" height="450">
             <Variant mode="AMBIENT" target="alpha" value="0"/>
 
-            <PartDraw x="0" y="0" width="450" height="450">
-                
-            </PartDraw>
+            <HourHand resource="" x="0" y="0" width="450" height="450">
+                <PartDraw x="0" y="0" width="450" height="450" angle="-90">
+                    // minutes
+                    <Rectangle x="150" y="0" width="450" height="450">
+                        <Fill color="[CONFIGURATION.color_secondary]"/>
+                        <Transform target="x" value="(1 - [MINUTE_SECOND]/60) * 450"/>
+                    </Rectangle>
+                    // minutes shadow
+                    <Rectangle x="0" y="0" width="450" height="450">
+                        <Fill color="#FF000000">
+                            <LinearGradient startX="225" startY="450" endX="225" endY="0"
+                                colors="#00000000 #FF000000" positions=".31 .35"/>
+                        </Fill>
+                    </Rectangle>
+
+                    // hours
+                    <Rectangle x="0" y="0" width="450" height="300">
+                        <Fill color="[CONFIGURATION.color_primary]"/>
+                    </Rectangle>
+
+                    // seconds window
+                    <Line startX="30" startY="260" endX="420" endY="260">
+                        <Stroke color="#FF000000" thickness="20" cap="ROUND"/>
+                    </Line>
+                    // gear window
+                    <Arc centerX="225" centerY="225" width="425" height="425" startAngle="-30" endAngle="30">
+                        <Stroke color="#FF000000" thickness="25" cap="BUTT"/>
+                    </Arc>
+                </PartDraw>
+                <Group x="0" y="0" width="450" height="450">
+                    <PartDraw x="0" y="0" width="450" height="450" angle="-90">
+                        // seconds
+                        <Rectangle x="25" y="250" width="15" height="20">
+                            <Transform target="x" value="[SECOND_MILLISECOND]/60 * 400 + 16"/>
+                            <Fill color="[CONFIGURATION.color_secondary]"/>
+                        </Rectangle>
+                    </PartDraw>
+                    <PartDraw x="0" y="0" width="450" height="450" angle="-90" renderMode="MASK">
+                        <Line startX="30" startY="260" endX="420" endY="260">
+                            <Stroke color="#FFFFFFFF" thickness="20" cap="ROUND"/>
+                        </Line>
+                    </PartDraw>
+                </Group>
+                <Group x="0" y="0" width="450" height="450">
+                    <PartDraw x="0" y="0" width="450" height="450" angle="-90">
+                        // minute ticks (5)
+                        <Line startX="0" startY="225" endX="450" endY="225">
+                            <Stroke color="#FF000000" thickness="450" cap="BUTT"
+                                dashIntervals="5 32.5"/>
+                        </Line>
+                        <Line startX="0" startY="225" endX="450" endY="225">
+                            <Stroke color="[CONFIGURATION.color_secondary]" thickness="450" cap="BUTT"
+                                dashIntervals="4 33.5" dashPhase="2"/>
+                        </Line>
+                        // minute ticks (15)
+                        <Line startX="0" startY="225" endX="450" endY="225">
+                            <Stroke color="[CONFIGURATION.color_secondary]" thickness="450" cap="BUTT"
+                                dashIntervals="12 100.5" dashPhase="6"/>
+                        </Line>
+                        <Line startX="0" startY="225" endX="450" endY="225">
+                            <Stroke color="#FF000000" thickness="450" cap="BUTT"
+                                dashIntervals="6 106.5" dashPhase="3"/>
+                        </Line>
+                    </PartDraw>
+                    <PartDraw x="0" y="0" width="450" height="450" angle="-90" renderMode="MASK">
+                        <Rectangle x="0" y="0" width="450" height="450">
+                            <Fill color="#FF000000">
+                                <LinearGradient startX="225" startY="450" endX="225" endY="0"
+                                    colors="#CCFFFFFF #00000000" positions=".25 .33"/>
+                            </Fill>
+                        </Rectangle>
+                    </PartDraw>
+                </Group>
+            </HourHand>
+
+            <Group x="0" y="0" width="450" height="450">
+                <SecondHand resource="" x="0" y="0" width="450" height="450">
+                    <Tick duration="0.1" strength="0"/>
+                    // gear
+                    <PartDraw x="0" y="0" width="450" height="450">
+                        <Ellipse x="10" y="10" width="430" height="430">
+                            <Stroke color="[CONFIGURATION.color_secondary]" thickness="11" cap="BUTT"
+                                dashIntervals="20 20"/>
+                        </Ellipse>
+                        <Ellipse x="15" y="15" width="420" height="420">
+                            <Fill color="[CONFIGURATION.color_secondary]"/>
+                        </Ellipse>
+                    </PartDraw>
+                </SecondHand>
+                // gear mask
+                <PartDraw x="0" y="0" width="450" height="450" renderMode="MASK">
+                    <Transform target="angle" value="[HOUR_0_11_MINUTE]/12 * 360 - 90"/>
+                    <Arc centerX="225" centerY="225" width="425" height="425" startAngle="-30" endAngle="30">
+                        <Stroke color="#FF000000" thickness="25" cap="BUTT"/>
+                    </Arc>
+                </PartDraw>
+            </Group>
         </Group>
+
+        <PartDraw x="0" y="0" width="450" height="450">
+            <Ellipse x="220" y="220" width="10" height="10">
+                <Stroke color="#80AAAAAA" thickness="2"/>
+            </Ellipse>
+        </PartDraw>
 
         // ALWAYS ON DISPLAY
         // -----------------------------------------------------------------------------------------
