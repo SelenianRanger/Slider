@@ -166,7 +166,55 @@
                         <Stroke color="#FF000000" thickness="30" cap="BUTT"/>
                     </Arc>
                 </PartDraw>
+            </Group>
 
+            // Date
+            <Group name="date" x="0" y="0" width="450" height="450">
+                <Transform target="angle" value="[HOUR_0_11]/12 * 360 - 90"/>
+                <Condition>
+                    <Expressions>
+                        <Expression name="isUpsideDown">[HOUR_0_23] &gt; 18 || [HOUR_0_23] &lt; 6</Expression>
+                    </Expressions>
+                    <Compare expression="isUpsideDown">
+                        <PartText x="135" y="65" width="180" height="50">
+                            <Launch target="CALENDAR"/>
+                            <TextCircular centerX="90" centerY="165" width="290" height="290" startAngle="28" endAngle="-28"
+                                direction="COUNTER_CLOCKWISE">
+                                <Font family="roboto_medium" size="24" color="#E6FFFFFF">
+                                    <Upper><Shadow color="#66000001" offsetX="1" offsetY="2" radius="3">
+                                        <Template>%s, %s %s
+                                            <Parameter expression="[DAY_OF_WEEK_S]"/>
+                                            <Parameter expression="[MONTH_S]"/>
+                                            <Parameter expression="[DAY_Z]"/>
+                                        </Template>
+                                    </Shadow></Upper>
+                                </Font>
+                            </TextCircular>
+                        </PartText>
+                    </Compare>
+                    <Default>
+                        <PartText x="135" y="65" width="180" height="50">
+                            <Launch target="CALENDAR"/>
+                            <TextCircular centerX="90" centerY="165" width="290" height="290" startAngle="-28" endAngle="28"
+                                direction="CLOCKWISE">
+                                <Font family="roboto_medium" size="24" color="#E6FFFFFF">
+                                    <Upper><Shadow color="#66000001" offsetX="1" offsetY="2" radius="3">
+                                        <Template>%s, %s %s
+                                            <Parameter expression="[DAY_OF_WEEK_S]"/>
+                                            <Parameter expression="[MONTH_S]"/>
+                                            <Parameter expression="[DAY_Z]"/>
+                                        </Template>
+                                    </Shadow></Upper>
+                                </Font>
+                            </TextCircular>
+                        </PartText>
+                    </Default>
+                </Condition>
+            </Group>
+
+            // mid panel
+            <Group name="mid_panel" x="0" y="0" width="450" height="450">
+                <Transform target="angle" value="[HOUR_0_11]/12 * 360 - 90"/>
                 // panel shadows
                 <PartDraw x="0" y="0" width="450" height="450">
                     // top shadow
@@ -212,8 +260,7 @@
                 </PartDraw>
             </Group>
 
-
-            // background
+            // background overlay
             <Group name="background_overlay" x="0" y="0" width="450" height="450">
                 <PartImage x="0" y="0" width="450" height="450">
                     <Image resource="bg_dots"/>
@@ -221,7 +268,6 @@
                 <Group name="bg_mask" x="0" y="0" width="450" height="450" renderMode="MASK">
                     <Transform target="angle" value="[HOUR_0_11]/12 * 360 - 90"/>
                     <PartDraw x="0" y="0" width="450" height="450">
-
                         <Arc centerX="225" centerY="225" width="340" height="340" startAngle="-30.5" endAngle="30.5">
                             <Stroke color="#FF000000" thickness="30" cap="BUTT"/>
                         </Arc>
