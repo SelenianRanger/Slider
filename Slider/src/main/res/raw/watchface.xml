@@ -51,8 +51,8 @@
                 <Image resource="bg_dots"/>
             </PartImage>
 
-            // rotating clock
-            <Group name="clock" x="0" y="0" width="450" height="450">
+            // minutes bar
+            <Group name="minutes_bar" x="0" y="0" width="450" height="450">
                 <Transform target="angle" value="[HOUR_0_11]/12 * 360 - 90"/>
 
                 // minutes
@@ -60,6 +60,10 @@
                     <Rectangle x="150" y="0" width="450" height="450">
                         <Fill color="[CONFIGURATION.color_secondary]"/>
                         <Transform target="x" value="(1 - [MINUTE]/60) * 450"/>
+                    </Rectangle>
+                    <Rectangle x="150" y="0" width="450" height="450">
+                        <Fill color="#40000000"/>
+                        <Transform target="x" value="(1 - floor([MINUTE]/15) / 4) * 450"/>
                     </Rectangle>
                 </PartDraw>
 
@@ -86,7 +90,7 @@
                         </Line>
                     </PartDraw>
 
-                    // minutes mask
+                    // minutes tick mask
                     <Group name="minute_ticks_mask" x="0" y="0" width="450" height="450" renderMode="MASK">
                         // vertical mask
                         <PartDraw x="0" y="0" width="450" height="450">
@@ -102,7 +106,7 @@
                             <Rectangle x="0" y="0" width="450" height="450">
                                 <Fill color="#FF000000">
                                     <LinearGradient startX="0" startY="225" endX="225" endY="225"
-                                        colors="#00000000 #FFFFFFFF #FFFFFFFF #00000000" positions="0.75 0.95 1 1">
+                                        colors="#00000000 #FFFFFFFF #FFFFFFFF #00000000" positions="0.8 0.95 1 1">
                                         <Transform target="startX" value="-[MINUTE]/60 * 450"/>
                                         <Transform target="endX" value="(1 - [MINUTE]/60) * 450"/>
                                     </LinearGradient>
@@ -111,7 +115,7 @@
                             <Rectangle x="0" y="0" width="450" height="450">
                                 <Fill color="#FF000000">
                                     <LinearGradient startX="225" startY="225" endX="450" endY="225"
-                                        colors="#00000000 #FFFFFFFF #FFFFFFFF #00000000" positions="0.75 0.95 1 1">
+                                        colors="#00000000 #FFFFFFFF #FFFFFFFF #00000000" positions="0.8 0.95 1 1">
                                         <Transform target="startX" value="(2 - [MINUTE]/60) * 450"/>
                                         <Transform target="endX" value="(1 - [MINUTE]/60) * 450"/>
                                     </LinearGradient>
@@ -120,8 +124,12 @@
                         </PartDraw>
                     </Group>
                 </Group>
+            </Group>
 
-                // top half
+            // top half
+            <Group name="top_half" x="0" y="0" width="450" height="450">
+                <Transform target="angle" value="[HOUR_0_11]/12 * 360 - 90"/>
+
                 <Group name="top_cutout" x="0" y="0" width="450" height="450">
                     // top circles
                     <PartDraw x="0" y="0" width="450" height="450">
@@ -129,7 +137,10 @@
                             <Fill color="[CONFIGURATION.color_primary]"/>
                         </Ellipse>
                         <Ellipse x="40" y="40" width="370" height="370">
-                            <Fill color="#44000000"/>
+                            <Fill color="#000000">
+                                <RadialGradient centerX="225" centerY="225" radius="185"
+                                    colors="#44000000 #44000000 #73000000" positions="0 0.95 1"/>
+                            </Fill>
                         </Ellipse>
                     </PartDraw>
 
@@ -145,7 +156,7 @@
                         </Line>
                     </PartDraw>
 
-                    // top shadow
+                    // top inner circle
                     <PartDraw x="0" y="0" width="450" height="450">
                         <Ellipse x="0" y="0" width="450" height="450">
                             <Fill color="#22000000"/>
@@ -290,6 +301,7 @@
             // mid panel
             <Group name="mid_panel" x="0" y="0" width="450" height="450">
                 <Transform target="angle" value="[HOUR_0_11]/12 * 360 - 90"/>
+
                 // panel shadows
                 <PartDraw x="0" y="0" width="450" height="450">
                     // top shadow
@@ -322,9 +334,12 @@
                 </PartDraw>
 
                 // mid lines
-                <PartDraw x="0" y="0" width="450" height="450">
+                <PartDraw x="0" y="0" width="450" height="450" tintColor="[CONFIGURATION.color_secondary]">
                     <Line startX="0" startY="225" endX="450" endY="225">
-                        <Stroke color="#FF000000" thickness="1" cap="BUTT"/>
+                        <Stroke color="#FF000000" thickness="2" cap="BUTT">
+                            <LinearGradient startX="0" startY="225" endX="450" endY="225"
+                                colors="#66000000 #66000000 #E6FFFFFF" positions="0 0.4 0.6"/>
+                        </Stroke>
                     </Line>
                     <Line startX="20" startY="230" endX="430" endY="230">
                         <Stroke color="#88000000" thickness="1" cap="BUTT"/>
@@ -356,29 +371,17 @@
             // seconds
             <Group name="seconds_marker" x="0" y="0" width="450" height="450">
                 <Transform target="angle" value="[HOUR_0_11]/12 * 360 - 90"/>
-                <Condition>
-                    <Expressions>
-                        <Expression name="isEvenMinute">[MINUTE]%2==0</Expression>
-                    </Expressions>
-                    <Compare expression="isEvenMinute">
-                        <PartDraw x="0" y="0" width="450" height="450">
-                            // seconds forward
-                            <Rectangle x="16" y="252" width="15" height="20">
-                                <Transform target="x" value="[SECOND_MILLISECOND]/60 * 400 + 16"/>
-                                <Fill color="[CONFIGURATION.color_secondary]"/>
-                            </Rectangle>
-                        </PartDraw>
-                    </Compare>
-                    <Default>
-                        <PartDraw x="0" y="0" width="450" height="450">
-                            // seconds backward
-                            <Rectangle x="16" y="252" width="15" height="20">
-                                <Transform target="x" value="435 - ([SECOND_MILLISECOND]/60 * 400 + 16)"/>
-                                <Fill color="[CONFIGURATION.color_secondary]"/>
-                            </Rectangle>
-                        </PartDraw>
-                    </Default>
-                </Condition>
+
+                <PartDraw x="5" y="252" width="45" height="20">
+                    <Transform target="x" value="([MINUTE] % 2) * 405 + (1 - ([MINUTE] % 2) * 2) * ([SECOND_MILLISECOND]/60 * 395 + 5)"/>
+                    <Rectangle x="0" y="0" width="20" height="20">
+                        <Fill color="[CONFIGURATION.color_secondary]"/>
+                    </Rectangle>
+                    <Rectangle x="25" y="0" width="20" height="20">
+                        <Fill color="[CONFIGURATION.color_secondary]"/>
+                    </Rectangle>
+                </PartDraw>
+
                 <PartDraw x="0" y="0" width="450" height="450" renderMode="MASK">
                     <Line startX="30" startY="262" endX="420" endY="262">
                         <Stroke color="#FFFFFFFF" thickness="20" cap="ROUND"/>
@@ -389,6 +392,7 @@
             // heartrate arc
             <Group name="heartrate_arc" x="0" y="0" width="450" height="450">
                 <Transform target="angle" value="[HOUR_0_11]/12 * 360 - 90"/>
+
                 <PartDraw x="0" y="0" width="450" height="450">
                     <Arc centerX="225" centerY="225" width="450" height="450" startAngle="-90" endAngle="90">
                         <Stroke color="#66000000" thickness="1" cap="BUTT">
@@ -439,9 +443,142 @@
 
         // ALWAYS ON DISPLAY
         // -----------------------------------------------------------------------------------------
-        <Group name="Active" x="0" y="0" width="450" height="450" alpha="0">
+        <Group name="AOD" x="0" y="0" width="450" height="450" alpha="0">
             <Variant mode="AMBIENT" target="alpha" value="255"/>
 
+            // minute ambient
+            <Group name="minute_AOD" x="0" y="0"  width="450" height="450">
+                <Transform target="angle" value="[HOUR_0_11]/12 * 360 - 90"/>
+
+                // minutes bar
+                <PartDraw x="0" y="0" width="450" height="450" tintColor="[CONFIGURATION.color_secondary]">
+                    <Line startX="0" startY="225" endX="450" endY="225">
+                        <Stroke color="#FF666666" thickness="450" cap="BUTT"/>
+                        <Transform target="startX" value="(1 - [MINUTE]/60) * 450"/>
+                    </Line>
+                    <Line startX="0" startY="225" endX="450" endY="225">
+                        <Stroke color="#FF333333" thickness="450" cap="BUTT"/>
+                        <Transform target="startX" value="(1 - floor([MINUTE]/15) / 4) * 450"/>
+                    </Line>
+                </PartDraw>
+
+                // minutes ticks
+                <Group name="minute_ticks_AOD" x="0" y="0" width="450" height="450">
+                    <PartDraw x="0" y="0" width="450" height="450" tintColor="[CONFIGURATION.color_secondary]">
+                        // minute ticks (5)
+                        <Line startX="0" startY="225" endX="450" endY="225">
+                            <Stroke color="#FF666666" thickness="450" cap="BUTT"
+                                dashIntervals="4 33.5" dashPhase="2"/>
+                        </Line>
+                        <Line startX="0" startY="225" endX="450" endY="225">
+                            <Stroke color="#FF000000" thickness="450" cap="BUTT"
+                                dashIntervals="2 35.5" dashPhase="0"/>
+                        </Line>
+                        // minute ticks (15)
+                        <Line startX="0" startY="225" endX="450" endY="225">
+                            <Stroke color="#FF666666" thickness="450" cap="BUTT"
+                                dashIntervals="12 100.5" dashPhase="6"/>
+                        </Line>
+                        <Line startX="0" startY="225" endX="450" endY="225">
+                            <Stroke color="#FF000000" thickness="450" cap="BUTT"
+                                dashIntervals="6 106.5" dashPhase="0"/>
+                        </Line>
+                    </PartDraw>
+
+                    // minutes tick mask
+                    <PartDraw x="0" y="0" width="450" height="450" renderMode="MASK">
+                        <Rectangle x="0" y="0" width="450" height="450">
+                            <Fill color="#FF000000">
+                                <LinearGradient startX="0" startY="225" endX="225" endY="225"
+                                    colors="#00000000 #FFFFFFFF #FFFFFFFF #00000000" positions="0.8 0.95 1 1">
+                                    <Transform target="startX" value="-[MINUTE]/60 * 450"/>
+                                    <Transform target="endX" value="(1 - [MINUTE]/60) * 450"/>
+                                </LinearGradient>
+                            </Fill>
+                        </Rectangle>
+                        <Rectangle x="0" y="0" width="450" height="450">
+                            <Fill color="#FF000000">
+                                <LinearGradient startX="225" startY="225" endX="450" endY="225"
+                                    colors="#00000000 #FFFFFFFF #FFFFFFFF #00000000" positions="0.8 0.95 1 1">
+                                    <Transform target="startX" value="(2 - [MINUTE]/60) * 450"/>
+                                    <Transform target="endX" value="(1 - [MINUTE]/60) * 450"/>
+                                </LinearGradient>
+                            </Fill>
+                        </Rectangle>
+                    </PartDraw>
+                </Group>
+            </Group>
+
+            // hour ticks ambient
+            <PartDraw x="0" y="0"  width="450" height="450">
+                <Line startX="0" startY="225" endX="20" endY="225">
+                    <Stroke color="#99000000" thickness="8" cap="ROUND"/>
+                </Line>
+                <Line startX="0" startY="225" endX="20" endY="225">
+                    <Stroke color="#FF666666" thickness="6" cap="ROUND"/>
+                </Line>
+                <Line startX="430" startY="225" endX="450" endY="225">
+                    <Stroke color="#99000000" thickness="8" cap="ROUND"/>
+                </Line>
+                <Line startX="430" startY="225" endX="450" endY="225">
+                    <Stroke color="#FF666666" thickness="6" cap="ROUND"/>
+                </Line>
+                <Line startX="225" startY="0" endX="225" endY="20">
+                    <Stroke color="#99000000" thickness="8" cap="ROUND"/>
+                </Line>
+                <Line startX="225" startY="0" endX="225" endY="20">
+                    <Stroke color="#FF666666" thickness="6" cap="ROUND"/>
+                </Line>
+                <Line startX="225" startY="430" endX="225" endY="450">
+                    <Stroke color="#99000000" thickness="8" cap="ROUND"/>
+                </Line>
+                <Line startX="225" startY="430" endX="225" endY="450">
+                    <Stroke color="#FF666666" thickness="6" cap="ROUND"/>
+                </Line>
+            </PartDraw>
+
+            // hour ambient
+            <Group name="hour_AOD" x="0" y="0"  width="450" height="450">
+                <Transform target="angle" value="[HOUR_0_11]/12 * 360 - 90"/>
+                // hour hand
+                <PartDraw x="0" y="0" width="450" height="450">
+                    <Line startX="300" startY="225" endX="450" endY="225">
+                        <Stroke color="#FF000000" thickness="35" cap="ROUND"/>
+                    </Line>
+                </PartDraw>
+                <PartDraw x="0" y="0" width="450" height="450" tintColor="[CONFIGURATION.color_primary]">
+                    <Line startX="300" startY="225" endX="450" endY="225">
+                        <Stroke color="#FFD9D9D9" thickness="25" cap="ROUND"/>
+                    </Line>
+                </PartDraw>
+                <PartDraw x="0" y="0" width="450" height="450" tintColor="[CONFIGURATION.color_secondary]">
+                    <Line startX="300" startY="225" endX="450" endY="225">
+                        <Stroke color="#FFFFFFFF" thickness="4" cap="ROUND"/>
+                    </Line>
+                </PartDraw>
+            </Group>
+
+            // status bar ambient
+            <Group name="status_bar_AOD" x="0" y="0" width="450" height="450">
+                <Transform target="angle" value="[HOUR_0_11]/12 * 360 - 90"/>
+
+                // date
+                <PartText x="295" y="180" width="150" height="30">
+                    <Transform target="angle" value="floor([HOUR_0_11] / 6) * 180"/>
+                    <Launch target="CALENDAR"/>
+                    <Text>
+                        <Font family="roboto_medium" size="24" color="#FFD4D4D4">
+                            <Upper><Shadow color="#66000001" offsetX="1" offsetY="2" radius="3">
+                                <Template>%s, %s %s
+                                    <Parameter expression="[DAY_OF_WEEK_S]"/>
+                                    <Parameter expression="[MONTH_S]"/>
+                                    <Parameter expression="[DAY_Z]"/>
+                                </Template>
+                            </Shadow></Upper>
+                        </Font>
+                    </Text>
+                </PartText>
+            </Group>
         </Group>
 
         // Complications
