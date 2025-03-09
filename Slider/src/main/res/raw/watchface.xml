@@ -528,7 +528,7 @@
 
             // hour ticks ambient
             <PartDraw x="0" y="0"  width="450" height="450">
-                <Transform target="angle" value="((floor([HOUR_0_11] / 3) + 1) % 2) * 90"/>
+                <Transform target="angle" value="(floor([HOUR_0_11] / 3) % 2) * 90"/>
                 <Line startX="0" startY="225" endX="25" endY="225">
                     <Stroke color="#99000000" thickness="10" cap="ROUND"/>
                 </Line>
