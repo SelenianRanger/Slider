@@ -132,7 +132,7 @@
                     <Rectangle x="0" y="0" width="450" height="450">
                         <Fill color="#FF000000">
                             <RadialGradient centerX="225" centerY="225" radius="225"
-                                colors="#00000000 #00000000 #66000000" positions="0 0.93 1"/>
+                                colors="#00000000 #00000000 #B3000000" positions="0 0.94 1"/>
                         </Fill>
                     </Rectangle>
                 </PartDraw>
