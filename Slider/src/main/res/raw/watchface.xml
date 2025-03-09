@@ -349,16 +349,16 @@
                 // mid lines
                 <PartDraw x="0" y="0" width="450" height="450" tintColor="[CONFIGURATION.color_secondary]">
                     <Line startX="0" startY="225" endX="450" endY="225">
-                        <Stroke color="#FF000000" thickness="2" cap="BUTT">
+                        <Stroke color="#FF000000" thickness="3" cap="BUTT">
                             <LinearGradient startX="0" startY="225" endX="450" endY="225"
-                                colors="#66000000 #66000000 #E6FFFFFF" positions="0 0.4 0.6"/>
+                                colors="#80000000 #80000000 #E6FFFFFF" positions="0 0.4 0.6"/>
                         </Stroke>
                     </Line>
                     <Line startX="20" startY="230" endX="430" endY="230">
-                        <Stroke color="#88000000" thickness="1" cap="BUTT"/>
+                        <Stroke color="#99000000" thickness="1" cap="BUTT"/>
                     </Line>
                     <Line startX="30" startY="235" endX="420" endY="235">
-                        <Stroke color="#66000000" thickness="1" cap="BUTT"/>
+                        <Stroke color="#99000000" thickness="1" cap="BUTT"/>
                     </Line>
                 </PartDraw>
             </Group>
