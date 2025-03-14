@@ -59,30 +59,21 @@
                 <PartDraw x="0" y="0" width="450" height="450" tintColor="[CONFIGURATION.color_secondary]">
                     <Line startX="0" startY="225" endX="450" endY="225">
                         <Stroke color="#FFFFFFFF" thickness="450" cap="BUTT"/>
-                        <Transform target="startX" value="(1 - [MINUTE]/60) * 450"/>
+                        <Transform target="startX" value="(1 - ([MINUTE] % 15) / 15) * 450"/>
                     </Line>
                 </PartDraw>
 
                 // minute ticks
                 <Group name="minute_ticks" x="0" y="0" width="450" height="450">
-                    <PartDraw x="0" y="0" width="450" height="450">
-                        // minute ticks (5)
+                    // minute bar
+                    <PartDraw x="0" y="0" width="450" height="450" tintColor="[CONFIGURATION.color_secondary]">
                         <Line startX="0" startY="225" endX="450" endY="225">
-                            <Stroke color="[CONFIGURATION.color_secondary]" thickness="450" cap="BUTT"
-                                dashIntervals="4 33.5" dashPhase="2"/>
+                            <Stroke color="#FFFFFFFF" thickness="450" cap="BUTT"
+                                dashIntervals="2 148" dashPhase="2"/>
                         </Line>
                         <Line startX="0" startY="225" endX="450" endY="225">
                             <Stroke color="#FF000000" thickness="450" cap="BUTT"
-                                dashIntervals="2 35.5" dashPhase="0"/>
-                        </Line>
-                        // minute ticks (15)
-                        <Line startX="0" startY="225" endX="450" endY="225">
-                            <Stroke color="[CONFIGURATION.color_secondary]" thickness="450" cap="BUTT"
-                                dashIntervals="12 100.5" dashPhase="6"/>
-                        </Line>
-                        <Line startX="0" startY="225" endX="450" endY="225">
-                            <Stroke color="#FF000000" thickness="450" cap="BUTT"
-                                dashIntervals="6 106.5" dashPhase="0"/>
+                                dashIntervals="2 148" dashPhase="0"/>
                         </Line>
                     </PartDraw>
 
@@ -102,18 +93,18 @@
                             <Rectangle x="0" y="0" width="450" height="450">
                                 <Fill color="#FF000000">
                                     <LinearGradient startX="0" startY="225" endX="225" endY="225"
-                                        colors="#00000000 #FFFFFFFF #FFFFFFFF #00000000" positions="0.8 0.95 1 1">
-                                        <Transform target="startX" value="-[MINUTE]/60 * 450"/>
-                                        <Transform target="endX" value="(1 - [MINUTE]/60) * 450"/>
+                                        colors="#20000000 #FFFFFFFF #FFFFFFFF #00000000" positions="0.6 0.75 1 1">
+                                        <Transform target="startX" value="-([MINUTE] % 15) / 15 * 450"/>
+                                        <Transform target="endX" value="(1 - ([MINUTE] % 15) / 15) * 450"/>
                                     </LinearGradient>
                                 </Fill>
                             </Rectangle>
                             <Rectangle x="0" y="0" width="450" height="450">
                                 <Fill color="#FF000000">
                                     <LinearGradient startX="225" startY="225" endX="450" endY="225"
-                                        colors="#00000000 #FFFFFFFF #FFFFFFFF #00000000" positions="0.8 0.95 1 1">
-                                        <Transform target="startX" value="(2 - [MINUTE]/60) * 450"/>
-                                        <Transform target="endX" value="(1 - [MINUTE]/60) * 450"/>
+                                        colors="#20000000 #FFFFFFFF #FFFFFFFF #00000000" positions="0.6 0.75 1 1">
+                                        <Transform target="startX" value="(2 - ([MINUTE] % 15) / 15) * 450"/>
+                                        <Transform target="endX" value="(1 - ([MINUTE] % 15) / 15) * 450"/>
                                     </LinearGradient>
                                 </Fill>
                             </Rectangle>
@@ -121,11 +112,11 @@
                     </Group>
                 </Group>
 
-                // minute shadow
-                <PartDraw x="0" y="0" width="450" height="450">
-                    // 15 min shadow
+                // minute shadows
+                <PartDraw x="0" y="0" width="450" height="450" tintColor="[CONFIGURATION.color_secondary]">
+                    // 15 minute overlay
                     <Line startX="0" startY="225" endX="450" endY="225">
-                        <Stroke color="#55000000" thickness="450" cap="BUTT"/>
+                        <Stroke color="#AA808080" thickness="450" cap="BUTT"/>
                         <Transform target="startX" value="(1 - floor([MINUTE]/15) / 4) * 450"/>
                     </Line>
                     // radial shadow
@@ -467,30 +458,20 @@
                 <PartDraw x="0" y="0" width="450" height="450" tintColor="[CONFIGURATION.color_secondary]">
                     <Line startX="0" startY="225" endX="450" endY="225">
                         <Stroke color="#FF999999" thickness="450" cap="BUTT"/>
-                        <Transform target="startX" value="(1 - [MINUTE]/60) * 450"/>
+                        <Transform target="startX" value="(1 - ([MINUTE] % 15) / 15) * 450"/>
                     </Line>
                 </PartDraw>
 
                 // minutes ticks
                 <Group name="minute_ticks_AOD" x="0" y="0" width="450" height="450">
                     <PartDraw x="0" y="0" width="450" height="450" tintColor="[CONFIGURATION.color_secondary]">
-                        // minute ticks (5)
                         <Line startX="0" startY="225" endX="450" endY="225">
                             <Stroke color="#FF999999" thickness="450" cap="BUTT"
-                                dashIntervals="4 33.5" dashPhase="2"/>
+                                dashIntervals="2 148" dashPhase="2"/>
                         </Line>
                         <Line startX="0" startY="225" endX="450" endY="225">
                             <Stroke color="#E6000000" thickness="450" cap="BUTT"
-                                dashIntervals="2 35.5" dashPhase="0"/>
-                        </Line>
-                        // minute ticks (15)
-                        <Line startX="0" startY="225" endX="450" endY="225">
-                            <Stroke color="#FF999999" thickness="450" cap="BUTT"
-                                dashIntervals="12 100.5" dashPhase="6"/>
-                        </Line>
-                        <Line startX="0" startY="225" endX="450" endY="225">
-                            <Stroke color="#E6000000" thickness="450" cap="BUTT"
-                                dashIntervals="6 106.5" dashPhase="0"/>
+                                dashIntervals="2 148" dashPhase="0"/>
                         </Line>
                     </PartDraw>
 
@@ -499,28 +480,28 @@
                         <Rectangle x="0" y="0" width="450" height="450">
                             <Fill color="#FF000000">
                                 <LinearGradient startX="0" startY="225" endX="225" endY="225"
-                                    colors="#00000000 #FFFFFFFF #FFFFFFFF #00000000" positions="0.8 0.95 1 1">
-                                    <Transform target="startX" value="-[MINUTE]/60 * 450"/>
-                                    <Transform target="endX" value="(1 - [MINUTE]/60) * 450"/>
+                                    colors="#20000000 #FFFFFFFF #FFFFFFFF #00000000" positions="0.6 0.75 1 1">
+                                    <Transform target="startX" value="-([MINUTE] % 15) / 15 * 450"/>
+                                    <Transform target="endX" value="(1 - ([MINUTE] % 15) / 15) * 450"/>
                                 </LinearGradient>
                             </Fill>
                         </Rectangle>
                         <Rectangle x="0" y="0" width="450" height="450">
                             <Fill color="#FF000000">
                                 <LinearGradient startX="225" startY="225" endX="450" endY="225"
-                                    colors="#00000000 #FFFFFFFF #FFFFFFFF #00000000" positions="0.8 0.95 1 1">
-                                    <Transform target="startX" value="(2 - [MINUTE]/60) * 450"/>
-                                    <Transform target="endX" value="(1 - [MINUTE]/60) * 450"/>
+                                    colors="#20000000 #FFFFFFFF #FFFFFFFF #00000000" positions="0.6 0.75 1 1">
+                                    <Transform target="startX" value="(2 - ([MINUTE] % 15) / 15) * 450"/>
+                                    <Transform target="endX" value="(1 - ([MINUTE] % 15) / 15) * 450"/>
                                 </LinearGradient>
                             </Fill>
                         </Rectangle>
                     </PartDraw>
                 </Group>
 
-                // 15 minute shadow
-                <PartDraw x="0" y="0" width="450" height="450">
+                // 15 minute overlay
+                <PartDraw x="0" y="0" width="450" height="450" tintColor="[CONFIGURATION.color_secondary]">
                     <Line startX="0" startY="225" endX="450" endY="225">
-                        <Stroke color="#73000000" thickness="450" cap="BUTT"/>
+                        <Stroke color="#AA555555" thickness="450" cap="BUTT"/>
                         <Transform target="startX" value="(1 - floor([MINUTE]/15) / 4) * 450"/>
                     </Line>
                 </PartDraw>
