@@ -196,7 +196,7 @@
                 <Transform target="angle" value="[HOUR_0_11]/12 * 360 - 90"/>
 
                 // heartrate text
-                <Group name="heartrate_text" x="45" y="192" width="145" height="30">
+                <Group name="heartrate_text" x="43" y="192" width="145" height="30">
                     <Transform target="angle" value="floor([HOUR_0_11] / 6) * 180"/>
                     <Launch target="HEALTH_HEART_RATE"/>
 
@@ -232,7 +232,7 @@
                 </Group>
 
                 // Battery Indicator
-                <Group name="battery_indicator" x="190" y="192" width="45" height="30" scaleX="1.1" scaleY="1.3">
+                <Group name="battery_indicator" x="187" y="192" width="45" height="30" scaleX="0.9" scaleY="1.3">
                     <Transform target="angle" value="floor([HOUR_0_11] / 6) * 180"/>
                     <Launch target="BATTERY_STATUS"/>
                     // Indicator Background
@@ -294,7 +294,7 @@
                 </Group>
 
                 // date
-                <PartText x="235" y="192" width="170" height="30">
+                <PartText x="233" y="192" width="175" height="30">
                     <Transform target="angle" value="floor([HOUR_0_11] / 6) * 180"/>
                     <Launch target="CALENDAR"/>
                     <Text>
@@ -409,20 +409,20 @@
                 <PartDraw x="0" y="0" width="450" height="450">
                     <Arc centerX="225" centerY="225" width="450" height="450" startAngle="-90" endAngle="90">
                         <Stroke color="#66000000" thickness="1" cap="BUTT">
-                            <Transform target="thickness" value="clamp(-sin(([UTC_TIMESTAMP] % (60000/80)) / (60000/80) * 6.28), 0, 1) * 15"/>
+                            <Transform target="thickness" value="clamp(-sin(([UTC_TIMESTAMP] % (60000/[HEART_RATE])) / (60000/[HEART_RATE]) * 6.28), 0, 1) * 15"/>
                         </Stroke>
                     </Arc>
                 </PartDraw>
                 <PartDraw x="0" y="0" width="450" height="450">
-                    <Transform target="scaleX" value="1 + sin(([UTC_TIMESTAMP] % (60000/80)) / (60000/80) * 6.28) * 0.025"/>
-                    <Transform target="scaleY" value="1 + sin(([UTC_TIMESTAMP] % (60000/80)) / (60000/80) * 6.28) * 0.025"/>
+                    <Transform target="scaleX" value="1 + sin(([UTC_TIMESTAMP] % (60000/[HEART_RATE])) / (60000/[HEART_RATE]) * 6.28) * 0.025"/>
+                    <Transform target="scaleY" value="1 + sin(([UTC_TIMESTAMP] % (60000/[HEART_RATE])) / (60000/[HEART_RATE]) * 6.28) * 0.025"/>
                     <Arc centerX="225" centerY="225" width="435" height="435" startAngle="-90" endAngle="90">
                         <Stroke color="#44000000" thickness="3" cap="BUTT"/>
                     </Arc>
                 </PartDraw>
                 <PartDraw x="0" y="0" width="450" height="450">
-                    <Transform target="scaleX" value="1 + sin(([UTC_TIMESTAMP] % (60000/80)) / (60000/80) * 6.28) * 0.05"/>
-                    <Transform target="scaleY" value="1 + sin(([UTC_TIMESTAMP] % (60000/80)) / (60000/80) * 6.28) * 0.05"/>
+                    <Transform target="scaleX" value="1 + sin(([UTC_TIMESTAMP] % (60000/[HEART_RATE])) / (60000/[HEART_RATE]) * 6.28) * 0.05"/>
+                    <Transform target="scaleY" value="1 + sin(([UTC_TIMESTAMP] % (60000/[HEART_RATE])) / (60000/[HEART_RATE]) * 6.28) * 0.05"/>
                     <Arc centerX="225" centerY="225" width="422" height="422" startAngle="-90" endAngle="90">
                         <Stroke color="#22000000" thickness="2" cap="BUTT"/>
                     </Arc>
