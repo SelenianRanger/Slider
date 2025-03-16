@@ -51,73 +51,14 @@
                 <Image resource="bg_dots"/>
             </PartImage>
 
-            // 10 minutes bar
-            <Group name="minutes_bar_10" x="0" y="0" width="450" height="450">
+            // minutes
+            <Group name="minutes" x="0" y="0" width="450" height="450">
                 <Transform target="angle" value="[HOUR_0_11]/12 * 360 - 90"/>
-
-                // 10 minute ba
-                <PartDraw x="0" y="0" width="450" height="450" tintColor="[CONFIGURATION.color_secondary]">
-                    <Line startX="0" startY="225" endX="450" endY="225">
-                        <Stroke color="#FFFFFFFF" thickness="450" cap="BUTT"/>
-                        <Transform target="startX" value="(1 - floor([SECOND]/10) / 5) * 450"/>
-                    </Line>
-                </PartDraw>
-
-                // minute ticks
-                <Group name="minute_ticks" x="0" y="0" width="450" height="450">
-                    // minute bar
-                    <PartDraw x="0" y="0" width="450" height="450" tintColor="[CONFIGURATION.color_secondary]">
-                        <Line startX="0" startY="225" endX="450" endY="225">
-                            <Stroke color="#FFFFFFFF" thickness="450" cap="BUTT"
-                                dashIntervals="3 132" dashPhase="93"/>
-                        </Line>
-                    </PartDraw>
-                    <PartDraw x="0" y="0" width="450" height="450">
-                        <Line startX="0" startY="225" endX="450" endY="225">
-                            <Stroke color="#FF000000" thickness="450" cap="BUTT"
-                                dashIntervals="3 132" dashPhase="90"/>
-                        </Line>
-                    </PartDraw>
-
-                    // minutes tick mask
-                    <Group name="minute_ticks_mask" x="0" y="0" width="450" height="450" renderMode="MASK">
-                        // vertical mask
-                        <PartDraw x="0" y="0" width="450" height="450">
-                            <Rectangle x="0" y="0" width="450" height="450">
-                                <Fill color="#FF000000">
-                                    <LinearGradient startX="225" startY="300" endX="225" endY="450"
-                                        colors="#FFFFFFFF #10000000" positions="0 1"/>
-                                </Fill>
-                            </Rectangle>
-                        </PartDraw>
-                        // horizontal mask
-                        <PartDraw x="0" y="0" width="450" height="450" renderMode="MASK">
-                            <Rectangle x="0" y="0" width="450" height="450">
-                                <Fill color="#FF000000">
-                                    <LinearGradient startX="0" startY="225" endX="225" endY="225"
-                                        colors="#22000000 #FFFFFFFF #FFFFFFFF #00000000" positions="0.7 0.8 1 1">
-                                        <Transform target="startX" value="-floor([SECOND]/10) / 6 * 450"/>
-                                        <Transform target="endX" value="(1 - floor([SECOND]/10) / 6) * 450"/>
-                                    </LinearGradient>
-                                </Fill>
-                            </Rectangle>
-                            <Rectangle x="0" y="0" width="450" height="450">
-                                <Fill color="#FF000000">
-                                    <LinearGradient startX="225" startY="225" endX="450" endY="225"
-                                        colors="#22000000 #FFFFFFFF #FFFFFFFF #00000000" positions="0.8 0.9 1 1">
-                                        <Transform target="startX" value="(2 - floor([SECOND]/10) / 6) * 450"/>
-                                        <Transform target="endX" value="(1 - floor([SECOND]/10) / 6) * 450"/>
-                                    </LinearGradient>
-                                </Fill>
-                            </Rectangle>
-                        </PartDraw>
-                    </Group>
-                </Group>
 
                 // minute bar overlay
                 <PartDraw x="0" y="0" width="450" height="450" tintColor="[CONFIGURATION.color_secondary]">
                     <Rectangle x="0" y="0" width="450" height="450">
-                        <Fill color="#66404040"/>
+                        <Fill color="#55444444"/>
                     </Rectangle>
                 </PartDraw>
 
@@ -129,7 +70,7 @@
                                 dashIntervals="6 110" dashPhase="0"/>
                         </Arc>
                         <Arc centerX="225" centerY="225" width="448" height="448" startAngle="90" endAngle="270">
-                            <Stroke color="#FFFFFFFF" thickness="450" cap="BUTT"
+                            <Stroke color="#FFDDDDDD" thickness="450" cap="BUTT"
                                 dashIntervals="2 114" dashPhase="-2"/>
                         </Arc>
                     </PartDraw>
@@ -137,7 +78,7 @@
                         <Rectangle x="0" y="0" width="450" height="450">
                             <Fill color="FF000000">
                                 <RadialGradient centerX="225" centerY="225" radius="225"
-                                    colors="#00000000 #00000000 #FFFFFFFF" positions="0 0.75 1"/>
+                                    colors="#00000000 #00000000 #FFFFFFFF" positions="0.5 0.7 1"/>
                             </Fill>
                         </Rectangle>
                     </PartDraw>
@@ -146,12 +87,82 @@
                 // 1 minute needle
                 <PartDraw x="0" y="0" width="450" height="450" tintColor="[CONFIGURATION.color_secondary]">
                     <Transform target="angle" value="([SECOND] % 10) / 10 * 150 + 15"/>
-                    <Line startX="225" startY="225" endX="432" endY="225">
-                        <Stroke color="#BB000000" thickness="10" cap="BUTT"/>
+                    <Line startX="225" startY="225" endX="450" endY="225">
+                        <Stroke color="#FFFFFFFF" thickness="25" cap="BUTT"/>
                     </Line>
-                    <Line startX="225" startY="225" endX="430" endY="225">
-                        <Stroke color="#FFFFFFFF" thickness="4" cap="BUTT"/>
+                    <Line startX="225" startY="225" endX="450" endY="225">
+                        <Stroke color="#CC000000" thickness="20" cap="BUTT"/>
                     </Line>
+                </PartDraw>
+
+                // 10 minute circles
+                // 1
+                <PartDraw x="0" y="0" width="450" height="450" tintColor="[CONFIGURATION.color_secondary]">
+                    <Transform target="alpha" value="ceil(clamp((0.51 - abs(1.5 - [SECOND]/10)), 0, 1)) * 255"/>
+                    <RoundRectangle x="35" y="110" width="380" height="230" cornerRadiusX="40" cornerRadiusY="60">
+                        <Fill color="#FFFFFFFF"/>
+                    </RoundRectangle>
+                </PartDraw>
+                // 2
+                <PartDraw x="0" y="0" width="450" height="450" tintColor="[CONFIGURATION.color_secondary]">
+                    <Transform target="alpha" value="ceil(clamp((0.51 - abs(2.5 - [SECOND]/10)), 0, 1)) * 255"/>
+                    <RoundRectangle x="35" y="110" width="380" height="230" cornerRadiusX="40" cornerRadiusY="60">
+                        <Fill color="#FFCCCCCC"/>
+                    </RoundRectangle>
+                    <RoundRectangle x="55" y="85" width="340" height="280" cornerRadiusX="60" cornerRadiusY="80">
+                        <Fill color="#FFFFFFFF"/>
+                    </RoundRectangle>
+                </PartDraw>
+                // 3
+                <PartDraw x="0" y="0" width="450" height="450" tintColor="[CONFIGURATION.color_secondary]">
+                    <Transform target="alpha" value="ceil(clamp((0.51 - abs(3.5 - [SECOND]/10)), 0, 1)) * 255"/>
+                    <RoundRectangle x="35" y="110" width="380" height="230" cornerRadiusX="40" cornerRadiusY="60">
+                        <Fill color="#FF999999"/>
+                    </RoundRectangle>
+                    <RoundRectangle x="55" y="85" width="340" height="280" cornerRadiusX="60" cornerRadiusY="80">
+                        <Fill color="#FFCCCCCC"/>
+                    </RoundRectangle>
+                    <RoundRectangle x="75" y="60" width="300" height="330" cornerRadiusX="90" cornerRadiusY="110">
+                        <Fill color="#FFFFFFFF"/>
+                    </RoundRectangle>
+                </PartDraw>
+                // 4
+                <PartDraw x="0" y="0" width="450" height="450" tintColor="[CONFIGURATION.color_secondary]">
+                    <Transform target="alpha" value="ceil(clamp((0.51 - abs(4.5 - [SECOND]/10)), 0, 1)) * 255"/>
+                    <RoundRectangle x="35" y="110" width="380" height="230" cornerRadiusX="40" cornerRadiusY="60">
+                        <Fill color="#FF666666"/>
+                    </RoundRectangle>
+                    <RoundRectangle x="55" y="85" width="340" height="280" cornerRadiusX="60" cornerRadiusY="80">
+                        <Fill color="#FF999999"/>
+                    </RoundRectangle>
+                    <RoundRectangle x="75" y="60" width="300" height="330" cornerRadiusX="90" cornerRadiusY="110">
+                        <Fill color="#FFCCCCCC"/>
+                    </RoundRectangle>
+                    <RoundRectangle x="95" y="40" width="260" height="370" cornerRadiusX="120" cornerRadiusY="140">
+                        <Fill color="#FFFFFFFF"/>
+                    </RoundRectangle>
+                </PartDraw>
+                // 5
+                <PartDraw x="0" y="0" width="450" height="450" tintColor="[CONFIGURATION.color_secondary]">
+                    <Transform target="alpha" value="ceil(clamp((0.51 - abs(5.5 - [SECOND]/10)), 0, 1)) * 255"/>
+                    <RoundRectangle x="35" y="110" width="380" height="230" cornerRadiusX="40" cornerRadiusY="60">
+                        <Fill color="#FF333333"/>
+                    </RoundRectangle>
+                    <RoundRectangle x="55" y="85" width="340" height="280" cornerRadiusX="60" cornerRadiusY="80">
+                        <Fill color="#FF666666"/>
+                    </RoundRectangle>
+                    <RoundRectangle x="75" y="60" width="300" height="330" cornerRadiusX="90" cornerRadiusY="110">
+                        <Fill color="#FF999999"/>
+                    </RoundRectangle>
+                    <RoundRectangle x="95" y="40" width="260" height="370" cornerRadiusX="120" cornerRadiusY="140">
+                        <Fill color="#FFCCCCCC"/>
+                    </RoundRectangle>
+                    <RoundRectangle x="115" y="30" width="220" height="390" cornerRadiusX="110" cornerRadiusY="180">
+                        <Fill color="#FFFFFFFF"/>
+                    </RoundRectangle>
+                    <RoundRectangle x="145" y="65" width="160" height="320" cornerRadiusX="80" cornerRadiusY="150">
+                        <Fill color="#FFCCCCCC"/>
+                    </RoundRectangle>
                 </PartDraw>
 
                 // radial shadow
