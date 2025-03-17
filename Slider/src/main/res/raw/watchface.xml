@@ -124,79 +124,63 @@
                 // 10 minute rectangles
                 // 1
                 <PartDraw x="0" y="0" width="450" height="450" tintColor="[CONFIGURATION.color_secondary]">
-                    <Transform target="alpha" value="ceil(clamp((0.51 - abs(1.5 - [MINUTE]/10)), 0, 1)) * 255"/>
+                    <Transform target="alpha" value="clamp(floor([MINUTE]/10), 0, 1) * 255"/>
                     <RoundRectangle x="35" y="110" width="380" height="230" cornerRadiusX="40" cornerRadiusY="40">
                         <Fill color="#FFFFFFFF"/>
                         <Stroke color="#AA000000" thickness="2"/>
+                    </RoundRectangle>
+                </PartDraw>
+                <PartDraw x="0" y="0" width="450" height="450">
+                    <Transform target="alpha" value="clamp(floor([MINUTE]/10) - 1, 0, 5) / 5 * 255"/>
+                    <RoundRectangle x="35" y="110" width="380" height="230" cornerRadiusX="40" cornerRadiusY="40">
+                        <Fill color="#BB000000"/>
                     </RoundRectangle>
                 </PartDraw>
                 // 2
                 <PartDraw x="0" y="0" width="450" height="450" tintColor="[CONFIGURATION.color_secondary]">
-                    <Transform target="alpha" value="ceil(clamp((0.51 - abs(2.5 - [MINUTE]/10)), 0, 1)) * 255"/>
-                    <RoundRectangle x="35" y="110" width="380" height="230" cornerRadiusX="40" cornerRadiusY="40">
-                        <Fill color="#FFCCCCCC"/>
-                        <Stroke color="#AA000000" thickness="2"/>
-                    </RoundRectangle>
-                    <RoundRectangle x="55" y="85" width="340" height="280" cornerRadiusX="60" cornerRadiusY="60">
+                    <Transform target="alpha" value="clamp(floor([MINUTE]/10) - 1, 0, 1) * 255"/>
+                    <RoundRectangle x="65" y="85" width="320" height="280" cornerRadiusX="60" cornerRadiusY="60">
                         <Fill color="#FFFFFFFF"/>
                         <Stroke color="#AA000000" thickness="2"/>
+                    </RoundRectangle>
+                </PartDraw>
+                <PartDraw x="0" y="0" width="450" height="450">
+                    <Transform target="alpha" value="clamp(floor([MINUTE]/10) - 2, 0, 5) / 5 * 255"/>
+                    <RoundRectangle x="65" y="85" width="320" height="280" cornerRadiusX="60" cornerRadiusY="60">
+                        <Fill color="#BB000000"/>
                     </RoundRectangle>
                 </PartDraw>
                 // 3
                 <PartDraw x="0" y="0" width="450" height="450" tintColor="[CONFIGURATION.color_secondary]">
-                    <Transform target="alpha" value="ceil(clamp((0.51 - abs(3.5 - [MINUTE]/10)), 0, 1)) * 255"/>
-                    <RoundRectangle x="35" y="110" width="380" height="230" cornerRadiusX="40" cornerRadiusY="40">
-                        <Fill color="#FF999999"/>
-                        <Stroke color="#AA000000" thickness="2"/>
-                    </RoundRectangle>
-                    <RoundRectangle x="65" y="85" width="320" height="280" cornerRadiusX="60" cornerRadiusY="60">
-                        <Fill color="#FFCCCCCC"/>
-                        <Stroke color="#AA000000" thickness="2"/>
-                    </RoundRectangle>
+                    <Transform target="alpha" value="clamp(floor([MINUTE]/10) - 2, 0, 1) * 255"/>
                     <RoundRectangle x="95" y="60" width="260" height="330" cornerRadiusX="90" cornerRadiusY="90">
                         <Fill color="#FFFFFFFF"/>
                         <Stroke color="#AA000000" thickness="2"/>
+                    </RoundRectangle>
+                </PartDraw>
+                <PartDraw x="0" y="0" width="450" height="450">
+                    <Transform target="alpha" value="clamp(floor([MINUTE]/10) - 3, 0, 5) / 5 * 255"/>
+                    <RoundRectangle x="95" y="60" width="260" height="330" cornerRadiusX="90" cornerRadiusY="90">
+                        <Fill color="#BB000000"/>
                     </RoundRectangle>
                 </PartDraw>
                 // 4
                 <PartDraw x="0" y="0" width="450" height="450" tintColor="[CONFIGURATION.color_secondary]">
-                    <Transform target="alpha" value="ceil(clamp((0.51 - abs(4.5 - [MINUTE]/10)), 0, 1)) * 255"/>
-                    <RoundRectangle x="35" y="110" width="380" height="230" cornerRadiusX="40" cornerRadiusY="40">
-                        <Fill color="#FF666666"/>
-                        <Stroke color="#AA000000" thickness="2"/>
-                    </RoundRectangle>
-                    <RoundRectangle x="65" y="85" width="320" height="280" cornerRadiusX="60" cornerRadiusY="60">
-                        <Fill color="#FF999999"/>
-                        <Stroke color="#AA000000" thickness="2"/>
-                    </RoundRectangle>
-                    <RoundRectangle x="95" y="60" width="260" height="330" cornerRadiusX="90" cornerRadiusY="90">
-                        <Fill color="#FFCCCCCC"/>
-                        <Stroke color="#AA000000" thickness="2"/>
-                    </RoundRectangle>
+                    <Transform target="alpha" value="clamp(floor([MINUTE]/10) - 3, 0, 1) * 255"/>
                     <RoundRectangle x="125" y="40" width="200" height="370" cornerRadiusX="120" cornerRadiusY="120">
                         <Fill color="#FFFFFFFF"/>
                         <Stroke color="#AA000000" thickness="2"/>
                     </RoundRectangle>
                 </PartDraw>
+                <PartDraw x="0" y="0" width="450" height="450" tintColor="[CONFIGURATION.color_secondary]">
+                    <Transform target="alpha" value="clamp(floor([MINUTE]/10) - 4, 0, 5) / 5 * 255"/>
+                    <RoundRectangle x="125" y="40" width="200" height="370" cornerRadiusX="120" cornerRadiusY="120">
+                        <Fill color="#BB000000"/>
+                    </RoundRectangle>
+                </PartDraw>
                 // 5
                 <PartDraw x="0" y="0" width="450" height="450" tintColor="[CONFIGURATION.color_secondary]">
-                    <Transform target="alpha" value="ceil(clamp((0.51 - abs(5.5 - [MINUTE]/10)), 0, 1)) * 255"/>
-                    <RoundRectangle x="35" y="110" width="380" height="230" cornerRadiusX="40" cornerRadiusY="40">
-                        <Fill color="#FF333333"/>
-                        <Stroke color="#AA000000" thickness="2"/>
-                    </RoundRectangle>
-                    <RoundRectangle x="65" y="85" width="320" height="280" cornerRadiusX="60" cornerRadiusY="60">
-                        <Fill color="#FF666666"/>
-                        <Stroke color="#AA000000" thickness="2"/>
-                    </RoundRectangle>
-                    <RoundRectangle x="95" y="60" width="260" height="330" cornerRadiusX="90" cornerRadiusY="90">
-                        <Fill color="#FF999999"/>
-                        <Stroke color="#AA000000" thickness="2"/>
-                    </RoundRectangle>
-                    <RoundRectangle x="125" y="40" width="200" height="370" cornerRadiusX="120" cornerRadiusY="120">
-                        <Fill color="#FFCCCCCC"/>
-                        <Stroke color="#AA000000" thickness="2"/>
-                    </RoundRectangle>
+                    <Transform target="alpha" value="clamp(floor([MINUTE]/10) - 4, 0, 1) * 255"/>
                     <RoundRectangle x="155" y="55" width="140" height="330" cornerRadiusX="100" cornerRadiusY="100">
                         <Fill color="#FFFFFFFF"/>
                         <Stroke color="#AA000000" thickness="2"/>
@@ -603,84 +587,68 @@
                 </PartDraw>
 
                 // 10 minute rectangles
-                // 1
-                <PartDraw x="0" y="0" width="450" height="450" tintColor="[CONFIGURATION.color_secondary]">
-                    <Transform target="alpha" value="ceil(clamp((0.51 - abs(1.5 - [MINUTE]/10)), 0, 1)) * 255"/>
-                    <Rectangle x="172" y="0" width="106" height="450">
-                        <Fill color="#FFEEEEEE"/>
-                        <Stroke color="#CC000000" thickness="2"/>
-                    </Rectangle>
-                </PartDraw>
-                // 2
-                <PartDraw x="0" y="0" width="450" height="450" tintColor="[CONFIGURATION.color_secondary]">
-                    <Transform target="alpha" value="ceil(clamp((0.51 - abs(2.5 - [MINUTE]/10)), 0, 1)) * 255"/>
-                    <Rectangle x="152" y="0" width="146" height="450">
-                        <Fill color="#FFEEEEEE"/>
-                        <Stroke color="#CC000000" thickness="2"/>
-                    </Rectangle>
-                    <Rectangle x="172" y="0" width="106" height="450">
-                        <Fill color="#FFBBBBBB"/>
-                        <Stroke color="#CC000000" thickness="2"/>
-                    </Rectangle>
-                </PartDraw>
-                // 3
-                <PartDraw x="0" y="0" width="450" height="450" tintColor="[CONFIGURATION.color_secondary]">
-                    <Transform target="alpha" value="ceil(clamp((0.51 - abs(3.5 - [MINUTE]/10)), 0, 1)) * 255"/>
-                    <Rectangle x="133" y="0" width="184" height="450">
-                        <Fill color="#FFEEEEEE"/>
-                        <Stroke color="#CC000000" thickness="2"/>
-                    </Rectangle>
-                    <Rectangle x="152" y="0" width="146" height="450">
-                        <Fill color="#FFBBBBBB"/>
-                        <Stroke color="#CC000000" thickness="2"/>
-                    </Rectangle>
-                    <Rectangle x="172" y="0" width="106" height="450">
-                        <Fill color="#FF888888"/>
-                        <Stroke color="#CC000000" thickness="2"/>
-                    </Rectangle>
-                </PartDraw>
-                // 4
-                <PartDraw x="0" y="0" width="450" height="450" tintColor="[CONFIGURATION.color_secondary]">
-                    <Transform target="alpha" value="ceil(clamp((0.51 - abs(4.5 - [MINUTE]/10)), 0, 1)) * 255"/>
-                    <RoundRectangle x="107" y="50" width="216" height="350" cornerRadiusX="60" cornerRadiusY="60">
-                        <Fill color="#FFEEEEEE"/>
-                        <Stroke color="#CC000000" thickness="2"/>
-                    </RoundRectangle>
-                    <Rectangle x="133" y="0" width="184" height="450">
-                        <Fill color="#FFBBBBBB"/>
-                        <Stroke color="#CC000000" thickness="2"/>
-                    </Rectangle>
-                    <Rectangle x="152" y="0" width="146" height="450">
-                        <Fill color="#FF888888"/>
-                        <Stroke color="#CC000000" thickness="2"/>
-                    </Rectangle>
-                    <Rectangle x="172" y="0" width="106" height="450">
-                        <Fill color="#FF555555"/>
-                        <Stroke color="#CC000000" thickness="2"/>
-                    </Rectangle>
-                </PartDraw>
                 // 5
                 <PartDraw x="0" y="0" width="450" height="450" tintColor="[CONFIGURATION.color_secondary]">
-                    <Transform target="alpha" value="ceil(clamp((0.51 - abs(5.5 - [MINUTE]/10)), 0, 1)) * 255"/>
+                    <Transform target="alpha" value="clamp(floor([MINUTE]/10) - 4, 0, 1) * 255"/>
                     <RoundRectangle x="80" y="90" width="290" height="270" cornerRadiusX="70" cornerRadiusY="70">
                         <Fill color="#FFEEEEEE"/>
                         <Stroke color="#CC000000" thickness="2"/>
                     </RoundRectangle>
+                </PartDraw>
+                // 4
+                <PartDraw x="0" y="0" width="450" height="450" tintColor="[CONFIGURATION.color_secondary]">
+                    <Transform target="alpha" value="clamp(floor([MINUTE]/10) - 3, 0, 1) * 255"/>
                     <RoundRectangle x="107" y="50" width="216" height="350" cornerRadiusX="60" cornerRadiusY="60">
-                        <Fill color="#FFBBBBBB"/>
+                        <Fill color="#FFEEEEEE"/>
                         <Stroke color="#CC000000" thickness="2"/>
                     </RoundRectangle>
+                </PartDraw>
+                <PartDraw x="0" y="0" width="450" height="450" tintColor="[CONFIGURATION.color_secondary]">
+                    <Transform target="alpha" value="clamp(floor([MINUTE]/10) - 4, 0, 5) / 5 * 255"/>
+                    <RoundRectangle x="107" y="50" width="216" height="350" cornerRadiusX="60" cornerRadiusY="60">
+                        <Fill color="#CC000000"/>
+                    </RoundRectangle>
+                </PartDraw>
+                // 3
+                <PartDraw x="0" y="0" width="450" height="450" tintColor="[CONFIGURATION.color_secondary]">
+                    <Transform target="alpha" value="clamp(floor([MINUTE]/10) - 2, 0, 1) * 255"/>
                     <Rectangle x="133" y="0" width="184" height="450">
-                        <Fill color="#FF888888"/>
+                        <Fill color="#FFEEEEEE"/>
                         <Stroke color="#CC000000" thickness="2"/>
                     </Rectangle>
+                </PartDraw>
+                <PartDraw x="0" y="0" width="450" height="450" tintColor="[CONFIGURATION.color_secondary]">
+                    <Transform target="alpha" value="clamp(floor([MINUTE]/10) - 3, 0, 5) / 5 * 255"/>
+                    <Rectangle x="133" y="0" width="184" height="450">
+                        <Fill color="#CC000000"/>
+                    </Rectangle>
+                </PartDraw>
+                // 2
+                <PartDraw x="0" y="0" width="450" height="450" tintColor="[CONFIGURATION.color_secondary]">
+                    <Transform target="alpha" value="clamp(floor([MINUTE]/10) - 1, 0, 1) * 255"/>
                     <Rectangle x="152" y="0" width="146" height="450">
-                        <Fill color="#FF555555"/>
+                        <Fill color="#FFEEEEEE"/>
                         <Stroke color="#CC000000" thickness="2"/>
                     </Rectangle>
+                </PartDraw>
+                <PartDraw x="0" y="0" width="450" height="450" tintColor="[CONFIGURATION.color_secondary]">
+                    <Transform target="alpha" value="clamp(floor([MINUTE]/10) - 2, 0, 5) / 5 * 255"/>
+                    <Rectangle x="152" y="0" width="146" height="450">
+                        <Fill color="#CC000000"/>
+                    </Rectangle>
+                </PartDraw>
+                // 1
+                <PartDraw x="0" y="0" width="450" height="450" tintColor="[CONFIGURATION.color_secondary]">
+                    <Transform target="alpha" value="clamp(floor([MINUTE]/10), 0, 1) * 255"/>
                     <Rectangle x="172" y="0" width="106" height="450">
-                        <Fill color="#FF333333"/>
+                        <Fill color="#FFEEEEEE"/>
                         <Stroke color="#CC000000" thickness="2"/>
+                    </Rectangle>
+                </PartDraw>
+                <PartDraw x="0" y="0" width="450" height="450" tintColor="[CONFIGURATION.color_secondary]">
+                    <Transform target="alpha" value="clamp(floor([MINUTE]/10) - 1, 0, 5) / 5 * 255"/>
+                    <Rectangle x="172" y="0" width="106" height="450">
+                        <Fill color="#CC000000"/>
                     </Rectangle>
                 </PartDraw>
 
